@@ -1,0 +1,28 @@
+name: before-pr
+on: [pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Building
+        run: |
+          npm ci
+          npm run build
+          cp .env.example .env
+
+      - name: Check eslint rules
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run test
