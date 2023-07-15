@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('name').notNullable()
       table.string('type').notNullable()
       table.string('token', 64).notNullable().unique()
-      table.integer('user_id').unsigned().references('uuid').inTable('users').onDelete('CASCADE').notNullable()
+      table.uuid('user_id').references('uuid').inTable('users').onDelete('CASCADE').notNullable()
 
       table.datetime('created_at', { useTz: true }).defaultTo(this.now()).notNullable()
       table.datetime('updated_at', { useTz: true }).defaultTo(this.raw('now() on update now()')).notNullable()

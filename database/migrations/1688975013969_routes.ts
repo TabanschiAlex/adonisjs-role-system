@@ -9,6 +9,7 @@ export default class extends BaseSchema {
 
       table.string('pattern').notNullable()
       table.string('handler').unique().notNullable()
+      table.string('description').nullable()
 
       table.datetime('created_at', { useTz: true }).defaultTo(this.now()).notNullable()
       table.datetime('updated_at', { useTz: true }).defaultTo(this.raw('now() on update now()')).notNullable()
