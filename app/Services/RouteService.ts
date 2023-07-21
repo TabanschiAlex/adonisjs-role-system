@@ -1,5 +1,6 @@
 import { execSync } from 'child_process'
 
+import NotFoundException from '../Exceptions/NotFoundException'
 import Route from '../Models/Route'
 
 export default class RouteService {
@@ -20,7 +21,15 @@ export default class RouteService {
     }
   }
 
-  public async updateRouteDescription(id: number, description: string) {
-    await Route.updateRouteDescription(id, description)
+  public async updateRouteDescription(id: number, description: string): Promise<void> {
+    const [count] = await Route.updateRouteDescription(id, description)
+
+    if (count === 0) {
+      throw new NotFoundException('routeNotFound')
+    }
+  }
+
+  public getAll(): Promise<Route[]> {
+    return Route.findAll()
   }
 }

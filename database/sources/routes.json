@@ -13,12 +13,35 @@
     },
     {
       "domain": "root",
-      "name": "",
-      "pattern": "/api/test",
+      "name": "routes.index",
+      "pattern": "/api/routes",
       "methods": [
-        "POST"
+        "GET",
+        "HEAD"
       ],
-      "handler": "Test.test",
+      "handler": "RoutesController.index",
+      "middleware": []
+    },
+    {
+      "domain": "root",
+      "name": "routes.create",
+      "pattern": "/api/routes/create",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "handler": "RoutesController.create",
+      "middleware": []
+    },
+    {
+      "domain": "root",
+      "name": "routes.update",
+      "pattern": "/api/routes/:id",
+      "methods": [
+        "PUT",
+        "PATCH"
+      ],
+      "handler": "RoutesController.update",
       "middleware": []
     }
   ]

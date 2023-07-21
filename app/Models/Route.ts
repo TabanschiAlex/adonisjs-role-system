@@ -1,6 +1,8 @@
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 
+const ROUTE_ATTRIBUTES = ['id', 'pattern', 'handler', 'description']
+
 export default class Route extends BaseModel {
   @column({ isPrimary: true })
   public id: number
@@ -28,5 +30,9 @@ export default class Route extends BaseModel {
 
   public static updateRouteDescription(id: number, description: string): Promise<number[]> {
     return this.query().where('id', id).update({ description })
+  }
+
+  public static findAll(): Promise<Route[]> {
+    return this.query().select(ROUTE_ATTRIBUTES).exec()
   }
 }
